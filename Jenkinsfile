@@ -2,16 +2,16 @@ pipeline {
     agent any
 
     environment {
-        // ── CHANGE THESE ──────────────────────────────────────────
-        DOCKER_IMAGE        = "your-dockerhub-username/java-cicd-app"
-        SONAR_URL           = "http://your-sonarqube-ip:9000"
-        HELM_REPO_URL       = "https://github.com/your-org/helm-charts-repo"
-        HELM_REPO_NAME      = "helm-charts-repo"
-        // ──────────────────────────────────────────────────────────
+       // ── CHANGE THESE ──────────────────────────────────────────
+    DOCKER_IMAGE        = "nimnaevz96/java-cicd-app"
+    SONAR_URL           = "http://54.238.224.46:9000"
+    HELM_REPO_URL       = "https://github.com/nimnadev/helm-charts-repo"
+    HELM_REPO_NAME      = "helm-charts-repo"
+    // ──────────────────────────────────────────────────────────
 
-        DOCKER_TAG          = "${BUILD_NUMBER}"
-        DOCKER_CREDS        = credentials('dockerhub-creds')     // Jenkins credential ID
-        GIT_TOKEN           = credentials('github-token')        // Jenkins credential ID
+    DOCKER_TAG          = "${BUILD_NUMBER}"
+    DOCKER_CREDS        = nimnadigileva9961271425('dockerhub-creds')
+    GIT_TOKEN           = nimnaloveeva9961271425('github-credentials')
     }
 
     stages {
@@ -89,7 +89,7 @@ pipeline {
                 echo '>>> Updating Helm chart with new image tag...'
                 sh """
                     rm -rf ${HELM_REPO_NAME}
-                    git clone https://${GIT_TOKEN}@github.com/your-org/${HELM_REPO_NAME}.git
+                   git clone https://${GIT_TOKEN}@github.com/nimnadev/${HELM_REPO_NAME}.git
                     cd ${HELM_REPO_NAME}
 
                     # Update image tag in values.yaml
